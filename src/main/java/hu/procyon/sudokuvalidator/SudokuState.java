@@ -81,8 +81,11 @@ public class SudokuState implements Cloneable {
                     sb.append(getDigit(i, j)).append(" ");
                 }
                 else {
-                    sb.append("  ");
+                    sb.append(". ");
                 }
+            }
+            if (i < SIZE - 1) {
+                sb.append('\n');
             }
         }
         return sb.toString();
