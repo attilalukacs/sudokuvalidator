@@ -3,7 +3,7 @@ package hu.procyon.sudokuvalidator;
 /**
  * SudokuState
  */
-public class SudokuState {
+public class SudokuState implements Cloneable {
     private static final int N = 3;
     private static final int SIZE = N * N;
 
@@ -14,24 +14,24 @@ public class SudokuState {
         return table[row * SIZE + column] != 0;
     }
 
-    public byte getDigit(final int row, final int column) {
+    public int getDigit(final int row, final int column) {
         return table[row * SIZE + column];
     }
 
-    public boolean isDigitExcluded(final int row, final int column, final byte digit) {
+    public boolean isDigitExcluded(final int row, final int column, final int digit) {
         short mask = (short)(1 << digit);
         return (excluded[row * SIZE + column] & mask) != 0;
     }
 
-    public boolean canSetDigit(final int row, final int column, final byte digit) {
+    public boolean canSetDigit(final int row, final int column, final int digit) {
         boolean cannotSet = isDigitSet(row, column) || isDigitExcluded(row, column, digit);
         return !cannotSet;
     }
 
-    public boolean setDigit(final int row, final int column, final byte digit) {
+    public boolean setDigit(final int row, final int column, final int digit) {
         boolean isValidMove = canSetDigit(row, column, digit) && isDigitValid(digit);
         if (isValidMove) {
-            table[row * SIZE + column] = digit;
+            table[row * SIZE + column] = (byte) digit;
             excludeColumn(column, digit);
             excludeRow(row, digit);
             excludeBlock(row, column, digit);
@@ -39,25 +39,25 @@ public class SudokuState {
         return isValidMove;
     }
 
-    public boolean isDigitValid(final byte digit) {
+    public boolean isDigitValid(final int digit) {
         return 1 <= digit && digit <= SIZE;
     }
 
-    private void excludeColumn(final int column, final byte digit) {
+    private void excludeColumn(final int column, final int digit) {
         short mask = (short)(1 << digit);
         for (int row = 0; row < SIZE; row++) {
             excluded[row * SIZE + column] |= mask;
         }
     }
 
-    private void excludeRow(final int row, final byte digit) {
+    private void excludeRow(final int row, final int digit) {
         short mask = (short)(1 << digit);
         for (int column = 0; column < SIZE; column++) {
             excluded[row * SIZE + column] |= mask;
         }
     }
 
-    private void excludeBlock(final int row, final int column, final byte digit) {
+    private void excludeBlock(final int row, final int column, final int digit) {
         int blockRow = row / N * N;
         int blockColumn = column / N * N;
         short mask = (short)(1 << digit);
@@ -66,6 +66,10 @@ public class SudokuState {
                 excluded[(blockRow + i) * SIZE + (blockColumn + j)] |= mask;
             }
         }
+    }
+
+    public int getSize() {
+        return SIZE;
     }
 
     @Override
@@ -82,5 +86,13 @@ public class SudokuState {
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        SudokuState clone = (SudokuState) super.clone();
+        clone.table = table.clone();
+        clone.excluded = excluded.clone();
+        return clone;
     }
 }
