@@ -78,10 +78,13 @@ public class SudokuState implements Cloneable {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 if (isDigitSet(i, j)) {
-                    sb.append(getDigit(i, j)).append(" ");
+                    sb.append(getDigit(i, j));
                 }
                 else {
-                    sb.append(". ");
+                    sb.append(' ');
+                }
+                if (j < SIZE - 1) {
+                    sb.append(',');
                 }
             }
             if (i < SIZE - 1) {
