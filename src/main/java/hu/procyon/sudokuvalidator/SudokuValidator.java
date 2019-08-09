@@ -7,15 +7,7 @@ public class SudokuValidator {
         if (args.length == 1) {
             File stateFile = new File(args[0]);
             if (stateFile.exists()) {
-                SudokuStateParser parser = new SudokuStateParser();
-                try {
-                    SudokuState state = parser.parseFile(stateFile);
-                    System.out.println(state.toString());
-                } catch (SudokuParseException e) {
-                    error("Sudoku state file is invalid.", 4);
-                } catch (SudokuStateException e) {
-                    error("Sudoku state is invalid.", 1);
-                }
+                processStateFile(stateFile);
             }
             else {
                 error("Sudoku state file " + stateFile.getPath() + " does NOT exist.", 2);
@@ -23,6 +15,21 @@ public class SudokuValidator {
         }
         else {
             error("SudokuValidator requires exactly 1 argument - state file.", 3);
+        }
+    }
+
+    private static void processStateFile(File stateFile) {
+        SudokuStateParser parser = new SudokuStateParser();
+        try {
+            SudokuState state = parser.parseFile(stateFile);
+            System.out.println(state.toString());
+            System.out.println("=====================");
+            SudokuState solved = new SudokuBacktracker().findSolution(state);
+            System.out.println(solved != null ? solved.toString() : "NO SOLUTION!");
+        } catch (SudokuParseException e) {
+            error("Sudoku state file is invalid.", 4);
+        } catch (SudokuStateException e) {
+            error("Sudoku state is invalid.", 1);
         }
     }
 
