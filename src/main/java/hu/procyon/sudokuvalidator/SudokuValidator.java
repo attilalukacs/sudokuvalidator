@@ -25,6 +25,7 @@ public class SudokuValidator {
             System.out.println(state.toString());
             System.out.println("=====================");
             SudokuState solved = new SudokuBacktracker().findSolution(state);
+            System.out.println("=====================");
             System.out.println(solved != null ? solved.toString() : "NO SOLUTION!");
         } catch (SudokuParseException e) {
             error("Sudoku state file is invalid.", 4);
