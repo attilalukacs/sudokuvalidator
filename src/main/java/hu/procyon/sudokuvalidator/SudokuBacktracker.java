@@ -12,27 +12,21 @@ public class SudokuBacktracker {
     SudokuEvaluator eval = new SudokuEvaluator();
 
     public SudokuState findSolution(final SudokuState initial) {
-        int tries = 0;
         Deque<BacktrackState> stack = new LinkedList<>();
         stack.push(getBacktrackState(initial.copy()));
         while (!stack.isEmpty()) {
             SudokuState state = stack.peek().state;
-            System.out.println("--------------------");
-            System.out.println(state);
             if (state.isFull()) {
                 return state;
             }
             Iterator<SudokuStep> stepIterator = stack.peek().stepIterator;
             if (stepIterator != null && stepIterator.hasNext()) {
-                System.out.println(" --> Forward: try " + tries++ + ", depth: " + stack.size());
                 SudokuStep step = stepIterator.next();
-                System.out.println(step);
                 SudokuState newState = state.copy();
                 newState.setDigit(step.coordinate.row, step.coordinate.column, step.digit);
                 stack.push(getBacktrackState(newState));
             }
             else {
-                System.out.println(" --> Back");
                 stack.remove();
             }
         }

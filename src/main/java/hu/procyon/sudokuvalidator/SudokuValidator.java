@@ -22,11 +22,13 @@ public class SudokuValidator {
         SudokuStateParser parser = new SudokuStateParser();
         try {
             SudokuState state = parser.parseFile(stateFile);
-            System.out.println(state.toString());
-            System.out.println("=====================");
             SudokuState solved = new SudokuBacktracker().findSolution(state);
-            System.out.println("=====================");
-            System.out.println(solved != null ? solved.toString() : "NO SOLUTION!");
+            if (solved != null) {
+                System.out.println(solved);
+            }
+            else {
+                error("Invalid puzzle.", 1);
+            }
         } catch (SudokuParseException e) {
             error("Sudoku state file is invalid.", 4);
         } catch (SudokuStateException e) {
