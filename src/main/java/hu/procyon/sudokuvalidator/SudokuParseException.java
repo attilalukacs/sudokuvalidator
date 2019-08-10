@@ -32,5 +32,4 @@ public class SudokuParseException extends Exception {
     public int getPosition() {
         return position;
     }
-
 }

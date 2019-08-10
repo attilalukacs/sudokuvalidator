@@ -5,15 +5,15 @@ import java.util.Arrays;
 /**
  * Represents a state in a 9×9 Sudoku solution, without the distinction between
  * cells originally filled and those filled during solving the puzzle.
- *
+ * <p>
  * The class stores which digit is written in which Sudoku cell, which cells are
  * still empty and what digits can still be filled in the empty cells.
- *
+ * <p>
  * Only empty {@code SudokuState} can be instantiated. From this empty state,
  * the user of the class can build a puzzle (based on some sort of input).
  * The class makes sure that no invalid state can be reached, that is,
  * same digits in the same row, column or block cannot be used.
- *
+ * <p>
  * The rows and columns are identified by 0 to 8
  * from top to bottom and left to right, respectively.
  * Valid digits go from 1 to 9.
@@ -49,7 +49,7 @@ public class SudokuState implements Cloneable {
     /**
      * Returns whether a digit is excluded in a given empty cell. A digit is excluded
      * if the same digit is set somewhere in the same row, column or block.
-     *
+     * <p>
      * The digit exclusion is independent of the digit set in the column. If a digit is
      * set in the position, it still returns false if a digit is not excluded by
      * the affected neighbouring cells.
@@ -92,7 +92,6 @@ public class SudokuState implements Cloneable {
 
     /**
      * Returns whether the given digit can be set in the given cell.
-     *
      * @param row the number of row (0-8 from top to bottom)
      * @param column the number of column (0-8 from left to right)
      * @param digit the digit 1-9 to be tested
@@ -105,7 +104,9 @@ public class SudokuState implements Cloneable {
 
     /**
      * Tries to modify the Sudoku state by entering the given digit in the given
-     * cell. If the move is valid, that is, the cell is empty and the digit is not excluded
+     * cell.
+     * <p>
+     * If the move is valid, that is, the cell is empty and the digit is not excluded
      * by the same row, column or block, then the state will be modified and the method
      * returns true. Otherwise, the state stays intact and false is returned.
      * @param row the number of row (0-8 from top to bottom)
@@ -176,7 +177,7 @@ public class SudokuState implements Cloneable {
     }
 
     /**
-     * Gives the size of the table (9)
+     * Gives the size of the table (9).
      * @return 9
      */
     public int getSize() {
@@ -193,7 +194,7 @@ public class SudokuState implements Cloneable {
 
     /**
      * Gives a canonical textual representation of this state, which can also be parsed by {@code SudokuStateParser}.
-     *
+     * <p>
      * Example for the puzzle taken from Wikipedia:
      * <pre>
      * 5,3, , ,7

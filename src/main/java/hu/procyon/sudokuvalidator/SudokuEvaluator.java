@@ -51,7 +51,7 @@ public class SudokuEvaluator {
      * Gives an iterator for possible steps in a given state, or null if there are no more steps.
      *
      * @param state
-     * @return
+     * @return iterator for the possible steps
      */
     public Iterator<SudokuStep> getStepIterator(SudokuState state) {
         SudokuCoordinate coordinate = findLeastAmbigousEmptyCoordinate(state);
