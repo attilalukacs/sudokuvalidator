@@ -1,7 +1,7 @@
 package hu.procyon.sudokuvalidator;
 
 /**
- * SudokuStep
+ * Data class for storing a possible step in a Sudoku state.
  */
 public class SudokuStep {
 

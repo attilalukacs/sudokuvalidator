@@ -2,6 +2,9 @@ package hu.procyon.sudokuvalidator;
 
 import java.io.File;
 
+/**
+ * Main class for the sudokuvalidator application.
+ */
 public class SudokuValidator {
     public static void main(String[] args) {
         if (args.length == 1) {
@@ -40,5 +43,4 @@ public class SudokuValidator {
         System.err.println(message);
         System.exit(errorCode);
     }
-
 }

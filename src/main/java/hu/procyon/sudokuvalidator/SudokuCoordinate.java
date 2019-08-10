@@ -1,7 +1,7 @@
 package hu.procyon.sudokuvalidator;
 
 /**
- * SudokuCoordinate
+ * Data class to represent a cell's coordinates in a Sudoku table.
  */
 public class SudokuCoordinate {
 

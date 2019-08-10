@@ -1,7 +1,7 @@
 package hu.procyon.sudokuvalidator;
 
 /**
- * SudokuParseException
+ * Class to represent an error while parsing a {@code SudokuState}.
  */
 public class SudokuParseException extends Exception {
     private static final long serialVersionUID = 5371475755903521566L;

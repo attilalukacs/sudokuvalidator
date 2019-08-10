@@ -1,7 +1,8 @@
 package hu.procyon.sudokuvalidator;
 
 /**
- * SudokuStateException
+ * Class to represent an error situation while parsing a {@code SudokuState}, in case
+ * the state to be parsed is invalid.
  */
 public class SudokuStateException extends Exception {
     private static final long serialVersionUID = -8728080594488518624L;
