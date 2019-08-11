@@ -13,7 +13,7 @@ public class SudokuValidator {
                 processStateFile(stateFile);
             }
             else {
-                error("Sudoku state file " + stateFile.getPath() + " does NOT exist.", 2);
+                error("Sudoku puzzle file " + stateFile.getPath() + " does NOT exist.", 2);
             }
         }
         else {
@@ -27,15 +27,17 @@ public class SudokuValidator {
             SudokuState state = parser.parseFile(stateFile);
             SudokuState solved = new SudokuBacktracker().findSolution(state);
             if (solved != null) {
-                System.out.println(solved);
+                System.out.println("Valid Sudoku puzzle.");
+                //System.out.println("Solution:");
+                //System.out.println(solved);
             }
             else {
                 error("Invalid puzzle.", 1);
             }
         } catch (SudokuParseException e) {
-            error("Sudoku state file is invalid.", 4);
+            error("Sudoku puzzle file is invalid.", 4);
         } catch (SudokuStateException e) {
-            error("Sudoku state is invalid.", 1);
+            error("Invalid puzzle.", 1);
         }
     }
 
