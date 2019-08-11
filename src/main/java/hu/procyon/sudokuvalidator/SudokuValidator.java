@@ -17,7 +17,7 @@ public class SudokuValidator {
             }
         }
         else {
-            error("SudokuValidator requires exactly 1 argument - state file.", 3);
+            error("SudokuValidator requires exactly 1 argument: puzzle file path", 3);
         }
     }
 
