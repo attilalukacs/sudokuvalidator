@@ -5,6 +5,7 @@ SRC_JAR_DIR = target
 STARTER_SCRIPT_LINUX = sudokuvalidator.sh
 STARTER_SCRIPT_WINDOWS = sudokuvalidator.bat
 STARTER_SCRIPTS = $(STARTER_SCRIPT_LINUX) $(STARTER_SCRIPT_WINDOWS)
+OTHER_FILES = LICENSE README.md
 
 .PHONY: clean package default
 
@@ -19,7 +20,7 @@ package: $(PACKAGE_NAME).zip
 $(PACKAGE_NAME).zip: $(SRC_JAR_DIR)/$(SRC_JAR)
 	$(eval TMPDIR := $(shell mktemp -d))
 	cp $(SRC_JAR_DIR)/$(SRC_JAR) $(TMPDIR)/
-	cp $(STARTER_SCRIPTS) $(TMPDIR)/
+	cp $(STARTER_SCRIPTS) $(OTHER_FILES) $(TMPDIR)/
 	sed 's/^SET JAR_DIR=.*$$/SET JAR_DIR=./g' -i $(TMPDIR)/$(STARTER_SCRIPT_WINDOWS)
 	unix2dos $(TMPDIR)/$(STARTER_SCRIPT_WINDOWS)
 	sed 's/^JAR_DIR=.*$$/JAR_DIR=./g' -i $(TMPDIR)/$(STARTER_SCRIPT_LINUX)
